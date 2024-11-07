@@ -63,9 +63,9 @@ function Body() {
       <div className='body'>
         { /* ------------------grid special items------------------------ */ }
 
-        <div className="images-grid-container">
+        <div className="images-grid-container flex flex-col">
           <div className="grid-header">
-             <h2>What's on your mind?</h2> 
+             <h2 className='text-2xl p-4 font-bold'>What's on your mind?</h2> 
           </div>
           <div className="res-special-items"> 
             {specialItemsData && (
@@ -94,8 +94,8 @@ function Body() {
           </div>      
         </div>
         {/* top rated chains */ }
-        <div className='top-rated-res-container'>
-          <h2>Top restaurant chains</h2>
+        <div className='top-rated-res-container flex h-[200px]'>
+          <h2 className='text-2xl font-bold p-4'>Top restaurant chains</h2>
           <div className="filter-top-res-cards">
            {/* let filteredList = originalRestaurantsData.filter((restaurant) => {
                       return restaurant.info.avgRatingString >= 4.0 //filter for top rated restuarants
@@ -108,17 +108,17 @@ function Body() {
             
          {/* section contains restaurants with online food delievery */}
 
-        <div className='online-food-restaurants'> 
-          <h2>Restaurants with online food delievery</h2>  
+        <div className='online-food-restaurants flex flex-col'> 
+          <h2 className='text-2xl font-bold p-4'>Restaurants with online food delievery</h2>  
           {/*----------div named Search-bar contain code to search desired food and restaurants from list or data -------------- */} 
 
-          <div className="search-bar">
-            <input type="text" placeholder="Search for food or restaurants" id="search-text"
+          <div className="search-bar flex justify-center">
+            <input type="text"className='border border-gray-300  p-2 focus:outline-none  w-[400px] h-[50px]' placeholder="Search for food or restaurants" id="search-text"
             onChange={(e) => {
               searchText=e.target.value.toLowerCase();
             }}
             />
-            <button className="search-btn" onClick={() => {
+            <button className="search-btn h-[50px] w-[50px] pl-4 bg-customOrange hover:bg-gray-300" onClick={() => {
               if(!searchText){
                 //alert('Please enter something to search');
                  // If the search text is empty, reset to original data
@@ -138,15 +138,15 @@ function Body() {
                 setNoResultsFound(false);
               }
               }}}
-              ><i className=" fa fa-search"></i>
+              ><i className=" fa fa-search  text-xl mr-4"></i>
             </button>
           </div>
   
          
        {/*----------- div named filter-top-restaurants to show restaurants list having rating above or equal to 4.5 -------------------*/}
 
-          <div className='filter-top-restaurants'>
-              <button onClick={() => {
+          <div className='filter-top-restaurants flex'>
+              <button  className='bg-customOrange w-[300px] h-[50px] m-4' onClick={() => {
                   let filteredList = originalRestaurantsData.filter((restaurant) => {
                       return restaurant.info.avgRatingString >= 4.5 //filter for top rated restuarants
                   })
@@ -160,9 +160,9 @@ function Body() {
 
    {/* -----------------div container which has all cards of restaurants with data -------------------------------*/}
           
-            <div id="res-id" className='res-container'>
+            <div id="res-id" className='res-container flex flex-row justify-evenly w-full flex-wrap'>
               {
-                noResultsFound ? ( <div id="alert-message">No restaurants or food found matching your search criteria !</div>):(
+                noResultsFound ? ( <div id="alert-message text-red-500">No restaurants or food found matching your search criteria !</div>):(
                 restaurants && restaurants.map((restaurant, index) => {
                   return (
                   <Link to={"/restaurantmenu/" + restaurant.info.id}>

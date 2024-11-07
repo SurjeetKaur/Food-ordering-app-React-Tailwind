@@ -8,8 +8,8 @@ import { RES_IMG_URL} from '../utils/Constants'
 function ResSpecialItemsCards({imageId,description}) {
   
   return (
-      <div className="special-item-card">
-        <img className='grid-img' src={`${RES_IMG_URL}${imageId}`} alt="special-res-items" />  
+      <div className="special-item-card ml-16">
+        <img className='grid-img flex h-[180px] w-[144px]' src={`${RES_IMG_URL}${imageId}`} alt="special-res-items"/>  
         <div className="special-item-card__info">
           {/* <h3>{description}</h3> */}
         </div>
