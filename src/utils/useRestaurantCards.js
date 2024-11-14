@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react";
-import { RES_MENU_API } from "./Constants";
+import React from'react';
+import { DATA_RESTAURANTS, RES_API_URL } from './Constants';
 
-const useRestaurantMenu = (restaurantId) => {
-    const [resMenu, setResMenu] = useState([])
-    useEffect(() => {
-        fetchResMenu();
-    }, []);
-    const fetchResMenu = async () => {
-        const menuResAPI = await fetch(RES_MENU_API + restaurantId);
-        const jsonMenu = await menuResAPI.json();
-        console.log("jsonMenu", jsonMenu);
+async function useRestaurantCards() {
+    const data = await fetch(RES_API_URL);
+    let json = await data?.json()
+    //json = null;
+    let resData = json?.data?.cards[1].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[1].card?.card?.gridElements?.infoWithStyle?.restaurants
+        : json?.data?.cards[2].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[2].card?.card?.gridElements?.infoWithStyle?.restaurants
+            : json?.data?.cards[3].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[3].card?.card?.gridElements?.infoWithStyle?.restaurants
+                : json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants
+                    : DATA_RESTAURANTS;
+    console.log("resdata from hook", resData)
+    //resData = [];
+    return resData;
 
-        const cards = jsonMenu.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards
-
-        // get the categories
-        // 1. ItemCategory
-        const category = cards.filter((menuItem) => menuItem.card.card?.["@type"].includes("ItemCategory"))
-        console.log("category", category)
-        setResMenu(category)
-    }
-    return resMenu;
 }
 
-export default useRestaurantMenu
+
+export default useRestaurantCards

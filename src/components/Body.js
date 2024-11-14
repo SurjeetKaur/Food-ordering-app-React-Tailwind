@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import withPromotionLabel from './withPromotionLabel';
+import useRestaurantCards from '../utils/useRestaurantCards';
 
 
 
@@ -35,39 +36,35 @@ function Body() {
 {/*---------async function named fetchData to call  and fetch data from swiggy API-------------------- */}  
 
     const fetchData = async () => {
-       setShimmerEffect(true); // Show shimmer effect while data is being fetched
+        setShimmerEffect(true); // Show shimmer effect while data is being fetched
         const data = await fetch(RES_API_URL);   
-        const json = await data.json()
-        console.log( 'data of api',data)
+        let json = await data.json()
+        //console.log( ' restaurants data of api',data);
 
         const resGridData= json?.data?.cards[0]?.card?.card?.imageGridCards?.info 
-        //  const resGridData= json.data.cards[0];
         setSpecialItemsData(resGridData);
-      
         setShimmerEffect(false); //hide shimmer effect
 
-         const resData = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants? json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants:
-         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants? json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants:
-         DATA_RESTAURANTS;
+        const resData= await useRestaurantCards();
         setRestaurants(resData);
         console.log( "resData",resData);
         setOriginalResturantsData(resData); //original restaurant's data
         setShimmerEffect(false);// Hide shimmer effect after fetching
     }
-   //  return (restaurants.length==0? <ShimmerUi />:
+   
 
    // HOC => accepts RestaurantCard as input and returns enhanced RestaurantCard
    const EnhancedRestaurantCard = withPromotionLabel(RestaurantCard)
 
-    return (shimmerEffect? <ShimmerUi/>:
+    return (shimmerEffect? <ShimmerUi/>: 
       <div className='body'>
         { /* ------------------grid special items------------------------ */ }
 
-        <div className="images-grid-container flex flex-col">
+        <div className="images-grid-container flex flex-col border-b border-gray-300">
           <div className="grid-header">
              <h2 className='text-2xl p-4 font-bold'>What's on your mind?</h2> 
           </div>
-          <div className="res-special-items"> 
+          <div className="res-special-items my-10"> 
             {specialItemsData && (
             <Slider
               className='grid-slider'
@@ -94,16 +91,42 @@ function Body() {
           </div>      
         </div>
         {/* top rated chains */ }
-        <div className='top-rated-res-container flex h-[200px]'>
+        <div className='top-rated-res-container flex flex-col border-b border-gray-300'>
           <h2 className='text-2xl font-bold p-4'>Top restaurant chains</h2>
-          <div className="filter-top-res-cards">
-           {/* let filteredList = originalRestaurantsData.filter((restaurant) => {
-                      return restaurant.info.avgRatingString >= 4.0 //filter for top rated restuarants
-                      setRestaurants(filteredList);
-                  }) */}
+          <div className="filter-top-res-cards flex flex-row flex-wrap justify-between my-10">
+              {
+                 <Slider
+                 className='grid-slider'
+                 infinite={true}
+                 speed={2000}
+                 slidesToShow={4}
+                 slidesToScroll={5} 
+                 style={{ width: '100%'}}
+                 arrows={true} 
+                 autoplay={true}
+                 autoplaySpeed={5000}
+                 > 
+                 {
+                  originalRestaurantsData.filter(restaurant => restaurant.info.avgRatingString >= 4.0)
+                  .map((restaurant, index) => (
+                      <EnhancedRestaurantCard
+                      key={index}
+                      promoted={restaurant.info.promotion}
+                      cloudinaryId={restaurant.info.cloudinaryImageId} 
+                      name={restaurant.info.name}
+                      deliveryTime={restaurant.info.sla.slaString}
+                      ratings={`${restaurant.info.avgRatingString}`}
+                      cuisines={restaurant.info.cuisines?.join(", ")} // join() is used to combine elements into a string. When working with objects, extract the property values to make them strings.
+                      areaName={restaurant.info.areaName}
+                      discountHeader={restaurant.info.aggregatedDiscountInfoV3?.header} 
+                      discountSubHeader={restaurant.info.aggregatedDiscountInfoV3?.subHeader}
+                      discountTag={restaurant.info.aggregatedDiscountInfoV3?.discountTag}
+                    />
+                  ))
+                }
+                </Slider>
+              }   
           </div>
-
-
         </div>
             
          {/* section contains restaurants with online food delievery */}
@@ -146,7 +169,7 @@ function Body() {
        {/*----------- div named filter-top-restaurants to show restaurants list having rating above or equal to 4.5 -------------------*/}
 
           <div className='filter-top-restaurants flex'>
-              <button  className='bg-customOrange w-[300px] h-[50px] m-4' onClick={() => {
+              <button  className='bg-customOrange w-[100px] h-[50px] m-4 rounded  hover:bg-gray-300' onClick={() => {
                   let filteredList = originalRestaurantsData.filter((restaurant) => {
                       return restaurant.info.avgRatingString >= 4.5 //filter for top rated restuarants
                   })
@@ -154,15 +177,15 @@ function Body() {
                   setRestaurants(filteredList) // Update the restaurants state with filtered results
                   //console.log("after filter restaurants", restaurants)
                 }} >
-                Top Rated Restaurants ➡️
+                 Ratings 4.4+
               </button>
           </div>
 
-   {/* -----------------div container which has all cards of restaurants with data -------------------------------*/}
+           {/* -----------------div container which has all cards of restaurants with data -------------------------------*/}
           
-            <div id="res-id" className='res-container flex flex-row justify-evenly w-full flex-wrap'>
+            <div id="res-id" className='res-container flex flex-row justify-evenly w-full flex-wrap mb-4'>
               {
-                noResultsFound ? ( <div id="alert-message text-red-500">No restaurants or food found matching your search criteria !</div>):(
+                noResultsFound ? ( <div id='alert-message' className='text-red-600 py-4'>No restaurants or food found matching your search criteria !</div>):(
                 restaurants && restaurants.map((restaurant, index) => {
                   return (
                   <Link to={"/restaurantmenu/" + restaurant.info.id}>
@@ -185,28 +208,12 @@ function Body() {
             </div>
           </div>
         </div>
-    )}
+    
+      )}
 
-// ----------export main Body component----------------------
 export default Body
 
 
 
-//other way to write code for search-bar
-{/* <input type="text" placeholder="Search for restaurants or food" id="search-text"/>
-          <button onClick={() => {
-            const searchValue = document.getElementById("search-text").value.toLowerCase(); 
-            let filteredResItems = restaurants.filter((restaurant) => {
-              const restaurantName = restaurant.info.name.toLowerCase().replace(/[^\w]/g, '').trim(); // remove non-word characters and trim whitespace
-              const cuisines = restaurant.info.cuisines.join(',').toLowerCase().replace(/[^\w]/g, '').trim(); // remove non-word characters and trim whitespace
-              return restaurantName.includes(searchValue) || cuisines.includes(searchValue); 
-            }); */}
-
-
-// manual code of res-container
-{/* <RestaurantCard name="Baskins" cuisines="Ice Cream, Desserts" deliveryTime="15-20 minutes" ratings="4.3 ⭐" />
-    <RestaurantCard name="Honest" cuisines="North Indian" deliveryTime="10-15 minutes" ratings="2.3 ⭐" />
-    <RestaurantCard name="Sankalp" cuisines="North Indian" deliveryTime="5-15 minutes" ratings="4.7 ⭐" />
-    */}
 
 

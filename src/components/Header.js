@@ -10,7 +10,7 @@ const Header = () => {
         console.log("header useEffect is called");
     }, [])
     return (
-        <div className="header w-full h-[100px] flex  flex-row justify-evenly flex-wrap border-b border-gray-300 shadow-md overflow-hidden">
+        <div className="header w-full h-[100px] flex  flex-row justify-evenly flex-wrap border-b border-gray-300 shadow-md">
             <div className="logo-container">
                 <Link to="/"><img  class="w-[70px] h-[70px] mt-2 transition-transform duration-300 transform hover:scale-110"
                     alt="app-logo"

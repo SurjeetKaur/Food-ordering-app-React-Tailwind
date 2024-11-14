@@ -6,11 +6,11 @@ import { RES_IMG_URL} from '../utils/Constants' //to access one out of multiple 
 
 function RestaurantCard({ name,discountHeader,discountSubHeader,discountTag ,cuisines, ratings, deliveryTime,areaName, cloudinaryId,}) {
     return (
-        <div className='res-card relative h-[400px] w-[300px] m-4 rounded-lg shadow-md'>
-            <img className='res-logo w-full h-[60%] rounded' src={`${RES_IMG_URL}${cloudinaryId}`} alt="restaurant image" />
+        <div className='res-card relative h-[400px] w-[300px] m-4 rounded-2xl shadow-slate-400 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-95'>
+            <img className='res-logo w-full h-[60%] rounded-2xl' src={`${RES_IMG_URL}${cloudinaryId}`} alt="restaurant image" />
             <span className="res-text absolute top-[50%] left-0 right-0 flex items-left bg-black  text-white z-10 w-full p-2 h-[42px] ">{discountHeader} {discountSubHeader} {discountTag}</span>
             <div className="res-description">
-                <h3 className='text-lg font-bold'>{name}</h3><br></br>
+                <h3 className='text-lg font-bold mb-2'>{name}</h3>
                 <h3><i className="fa fa-star text-green-500 mr-1"></i>{ratings} •{deliveryTime}</h3>
                 <p>{cuisines}</p> 
                 <p className="area-uppercase"><strong><i className=" fas fa-map-pin text-green-500 mr-1"></i>{areaName}</strong></p>
