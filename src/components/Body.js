@@ -95,7 +95,7 @@ function Body() {
           <h2 className='text-2xl font-bold p-4'>Top restaurant chains</h2>
           <div className="filter-top-res-cards flex flex-row flex-wrap justify-between my-10">
               {
-                 <Slider
+                <Slider
                  className='grid-slider'
                  infinite={true}
                  speed={2000}
@@ -105,25 +105,27 @@ function Body() {
                  arrows={true} 
                  autoplay={true}
                  autoplaySpeed={5000}
-                 > 
-                 {
-                  originalRestaurantsData.filter(restaurant => restaurant.info.avgRatingString >= 4.0)
-                  .map((restaurant, index) => (
-                      <EnhancedRestaurantCard
-                      key={index}
-                      promoted={restaurant.info.promotion}
-                      cloudinaryId={restaurant.info.cloudinaryImageId} 
-                      name={restaurant.info.name}
-                      deliveryTime={restaurant.info.sla.slaString}
-                      ratings={`${restaurant.info.avgRatingString}`}
-                      cuisines={restaurant.info.cuisines?.join(", ")} // join() is used to combine elements into a string. When working with objects, extract the property values to make them strings.
-                      areaName={restaurant.info.areaName}
-                      discountHeader={restaurant.info.aggregatedDiscountInfoV3?.header} 
-                      discountSubHeader={restaurant.info.aggregatedDiscountInfoV3?.subHeader}
-                      discountTag={restaurant.info.aggregatedDiscountInfoV3?.discountTag}
+                > 
+                  {
+                    originalRestaurantsData.filter(restaurant => restaurant.info.avgRatingString >= 4.0)
+                    .map((restaurant, index) => (
+                      <Link to={"/restaurantmenu/" + restaurant.info.id}>
+                        <EnhancedRestaurantCard
+                        key={index}
+                        promoted={restaurant.info.promotion}
+                        cloudinaryId={restaurant.info.cloudinaryImageId} 
+                        name={restaurant.info.name}
+                        deliveryTime={restaurant.info.sla.slaString}
+                        ratings={`${restaurant.info.avgRatingString}`}
+                        cuisines={restaurant.info.cuisines?.join(", ")} // join() is used to combine elements into a string. When working with objects, extract the property values to make them strings.
+                        areaName={restaurant.info.areaName}
+                        discountHeader={restaurant.info.aggregatedDiscountInfoV3?.header} 
+                        discountSubHeader={restaurant.info.aggregatedDiscountInfoV3?.subHeader}
+                        discountTag={restaurant.info.aggregatedDiscountInfoV3?.discountTag}
                     />
-                  ))
-                }
+                      </Link>
+                    ))
+                  }
                 </Slider>
               }   
           </div>

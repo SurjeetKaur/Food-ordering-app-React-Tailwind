@@ -3,19 +3,19 @@ import {useParams} from "react-router-dom";
 import { MOCK_RES_MENU, RES_MENU_API, MENU_IMAGE } from '../utils/Constants';
 import ShimmerUi from './ShimmerUi';
 import RestaurantMenuCategory from './RestaurantMenuCategory';
-import useRestaurantMenu from '../utils/useRestaurantMenu';
+import useRestaurantMenuCategory from '../utils/useRestaurantMenuCategory';
 
 
 function RestaurantMenu() {
     const { restaurantId } = useParams()
     //console.log("resId", restaurantId)
-    const categories = useRestaurantMenu(restaurantId)
-    console.log("categories", categories)
+    const categories = useRestaurantMenuCategory(restaurantId)
+    console.log("categories from Restaurant Menu", categories)
     if (categories.length == 0) {
         return <ShimmerUi />
     }
     return (
-        <div>
+        <div className='menu-categories'>
             <h3>
                 <ul>
                     {categories.map((category) => (

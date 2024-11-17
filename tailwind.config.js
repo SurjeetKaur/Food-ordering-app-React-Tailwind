@@ -9,6 +9,7 @@ module.exports = {
         customGrey:'#3d4152',
         customOrange: '#ff5200'
     },
+    
   },
   plugins: [],
 }
