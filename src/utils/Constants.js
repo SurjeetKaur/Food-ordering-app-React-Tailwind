@@ -18,7 +18,6 @@ export const RES_MENU_API = "https://www.swiggy.com/dapi/menu/pl?page-type=REGUL
 export const MENU_IMAGE= "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/"; 
 
 
-// manual api data OF HYDERABAD  LOCATION(SAIDABAD,HYDERABAD,TELANGANA,500059)
 export const  DATA_RESTAURANTS=[
                                 {
                                     "info": {
@@ -2072,3 +2071,4 @@ export const MOCK_RES_MENU=[
 
 
 
+ 

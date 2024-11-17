@@ -10,19 +10,45 @@ function RestaurantMenu() {
     const { restaurantId } = useParams()
     //console.log("resId", restaurantId)
     const categories = useRestaurantMenuCategory(restaurantId)
-    console.log("categories from Restaurant Menu", categories)
+   // console.log("categories from Restaurant Menu", categories)
     if (categories.length == 0) {
         return <ShimmerUi />
     }
     return (
-        <div className='menu-categories'>
-            <h3>
-                <ul>
-                    {categories.map((category) => (
-                        <RestaurantMenuCategory data={category} />
-                    ))}
-                </ul>
-            </h3>
+        <div className='menu-categories w-10/12 m-auto'>
+            <h2 className='text-customGrey text-center text-4xl p-6 '>Menu 🍽️</h2>
+            <div className='flex flex-wrap justify-center'>
+                <input type="text" className='border border-gray-300  p-2 focus:outline-none  w-[400px] h-[50px]' placeholder="Search for dishes"
+                onChange={(e) => {
+                searchText=e.target.value.toLowerCase();
+                }}
+                />
+                <button className="search-btn h-[50px] w-[50px] pl-4 bg-customOrange hover:bg-gray-300"><i className=" fa fa-search  text-xl mr-4"></i>
+                </button>
+            </div>
+            <div className='flex flex-wrap justify-center flex-row mb-4 my-4'>
+                <button className='rounded-lg  border-1 border-gray-600 bg-customOrange p-2 mx-2 hover:bg-slate-200'>
+                    Vegetarian
+                </button>
+                <button className='rounded-lg  border-1 border-gray-600 bg-customOrange p-2 mx-2  hover:bg-slate-200'>
+                    Non-Veg
+                </button>
+                <button className='rounded-lg  border-1 border-gray-600 bg-customOrange p-2 mx-2  hover:bg-slate-200'>
+                    BestSeller
+                </button>
+                
+            </div>
+            <br/>
+            <hr/>
+            <div>
+                <h3 className='my-6'>
+                    <ul>
+                        {categories.map((category) => (
+                            <RestaurantMenuCategory data={category} />
+                        ))}
+                    </ul>
+                </h3>
+            </div>  
         </div>
     )
 }
