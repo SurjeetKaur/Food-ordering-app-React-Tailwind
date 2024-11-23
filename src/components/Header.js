@@ -10,7 +10,7 @@ const Header = () => {
         console.log("header useEffect is called");
     }, [])
     return (
-        <div className="header w-full h-[100px] flex  flex-row justify-around border-b border-gray-300 shadow-md">
+        <div className="header w-full m-auto h-[100px] flex  flex-row justify-around shadow-bottomOnly">
             <div className="logo-container">
                 <Link to="/"><img  class="w-[70px] h-[70px] mt-2 transition-transform duration-300 transform hover:scale-110"
                     alt="app-logo"
@@ -22,6 +22,7 @@ const Header = () => {
                     <li><Link to="/corporate" className='text-customGrey hover:text-customOrange'><i className=" fa fa-briefcase mr-2"></i>Swiggy Corporate</Link></li>
                     <li><Link to="/search" className='text-customGrey hover:text-customOrange'><i className="fa fa-search  mr-2"></i>Search</Link></li>
                     <li><Link to="/offers" className='text-customGrey hover:text-customOrange'><i className="fa fa-gift mr-2"></i>Offers</Link></li>
+                    <li><Link to="/grocery" className='text-customGrey hover:text-customOrange'><i className='fa fa-leaf mr-2'></i>Grocery</Link></li>
                     <li><Link to="/help" className='text-customGrey hover:text-customOrange'><i className="fa fa-question-circle mr-2"></i>Help</Link></li>
                     <li>
                         <Link to='/#' className='text-customGrey hover:text-customOrange' onClick={()=>{

@@ -57,7 +57,7 @@ function Body() {
    const EnhancedRestaurantCard = withPromotionLabel(RestaurantCard)
 
     return (shimmerEffect? <ShimmerUi/>: 
-      <div className='body'>
+      <div className='body w-10/12 m-auto'>
         { /* ------------------grid special items------------------------ */ }
 
         <div className="images-grid-container flex flex-col border-b border-gray-300">
