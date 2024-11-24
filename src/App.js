@@ -5,21 +5,25 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Corporate from "./components/Corporate";
-
 import ErrorHandling from "./components/ErrorHandling";
 import RestaurantMenu from "./components/RestaurantMenu";
 import './index.css';
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+
 
 const Grocery=lazy(()=>import("./components/Grocery"));
 
 // applayout component contains static and dynamic pages
 const AppLayout = () => {
     return (
-        <>
-            <Header />
-             <Outlet />    {/*dynamic component */}
-            <Footer />
-        </>
+        <Provider store={appStore}>  {/* connect store to app for cart*/}
+            <>
+                <Header />
+                <Outlet />    {/*dynamic component */}
+                <Footer />
+            </>
+        </Provider>
     )
 }
 

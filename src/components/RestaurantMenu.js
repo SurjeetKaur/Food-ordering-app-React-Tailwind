@@ -16,7 +16,7 @@ function RestaurantMenu() {
     }
     return (
         <div className='menu-categories w-11/12 m-auto'>
-            <h2 className='text-customGrey text-center text-4xl p-6 '>Menu 🍽️</h2>
+            <h2 className='text-customGrey text-center text-4xl p-6'>Menu 🍽️</h2>
             <div className='flex flex-wrap justify-center'>
                 <input type="text" className='border border-gray-300  p-2 focus:outline-none  w-[400px] h-[50px]' placeholder="Search for dishes"
                 onChange={(e) => {
@@ -41,7 +41,7 @@ function RestaurantMenu() {
             <br/>
             <hr/>
             <div>
-                <h3 className='my-6'>
+                <h3>
                     <ul>
                         {categories.map((category) => (
                             <RestaurantMenuCategory data={category} />

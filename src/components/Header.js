@@ -2,13 +2,15 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import {LOGO_IMG } from "../utils/Constants"; //By using curly braces {LOGO_IMG},JavaScript  import only the LOGO_IMG constant from imagesConstants file
+import {useSelector} from 'react-redux'; //for cart update
 
 
 const Header = () => {
     const [btnText, setBtnText] = useState("Sign In");
     useEffect(() => {
-        console.log("header useEffect is called");
+        //console.log("header useEffect is called");
     }, [])
+    const cartItems= useSelector((store)=>store.cart.items);
     return (
         <div className="header w-full m-auto h-[100px] flex  flex-row justify-around shadow-bottomOnly">
             <div className="logo-container">
@@ -38,7 +40,7 @@ const Header = () => {
                             {btnText}
                          </Link> 
                     </li>
-                    <li><Link to="/cart" className='text-customGrey hover:text-customOrange'><i className="fa fa-shopping-cart"></i>Cart</Link></li>
+                    <li><Link className='text-customGrey hover:text-customOrange'><i className="fa fa-shopping-cart"></i>Cart <span className='text-white text-base bg-green-500 h-6 w-6 inline-block text-center rounded-full'>{cartItems.length}</span></Link></li>
 
                 </ul>
             </div>

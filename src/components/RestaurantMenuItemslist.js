@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { RES_IMG_URL } from '../utils/Constants'
 import nonVegIcon from '../images/non-veg.png';
 import vegIcon from '../images/vegetarian.png';
+import { addProduct } from '../utils/cartSlice'; //item to add in cart
 
 function ItemList({ items }) {
+    const dispatch=useDispatch();
+    const handleAddCartItem=()=>{
+        dispatch(addProduct("item added"))
+    }
     return (
         <div>
             {
@@ -20,7 +26,7 @@ function ItemList({ items }) {
                         </div>
                         <div className='W-32 h-32 rounded relative border-1 border-gray-600'>
                             <div className='absolute -bottom-0.5 left-1/2 transform -translate-x-1/2'>
-                                <button className='p-2 bg-black text-white shadow-lg rounded-lg m-auto hover:bg-gray-400'>Add +</button>
+                                <button className='p-2 bg-black text-white shadow-lg rounded-lg m-auto hover:bg-gray-400' onClick={handleAddCartItem}>Add +</button>
                             </div>
                             <img src={RES_IMG_URL + item.card.info.imageId} className="w-32 h-32 rounded-lg "  alt="item-image"/>
                         </div>
