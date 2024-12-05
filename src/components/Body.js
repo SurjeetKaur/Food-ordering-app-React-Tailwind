@@ -77,6 +77,29 @@ function Body() {
               arrows={true} 
               autoplay={true}
               autoplaySpeed={5000}
+              responsive={[
+                {
+                 breakpoint:640,
+                 settings: {
+                   slidesToShow: 2,
+                   slidesToScroll: 5,   
+                 }
+                },
+                {
+                 breakpoint: 480,
+                 settings: {
+                   slidesToShow: 2,
+                   slidesToScroll: 5,
+                   }
+                 },
+                 {
+                   breakpoint: 768, 
+                   settings: {
+                     slidesToShow: 2, 
+                     slidesToScroll: 5,
+                   }
+                 }
+               ]}
               >           
               {
                 specialItemsData.map((specialItem, index) => (
@@ -91,10 +114,10 @@ function Body() {
             )}
           </div>      
         </div>
-        {/* top rated chains */ }
+        {/* top restaurant chains */ }
         <div className='top-rated-res-container flex flex-col border-b border-gray-300'>
           <h2 className='text-2xl font-bold p-4'>Top restaurant chains</h2>
-          <div className="filter-top-res-cards flex flex-row flex-wrap justify-between my-10">
+          <div className="filter-top-res-cards flex flex-row  justify-between my-10">
               {
                 <Slider
                  className='grid-slider'
@@ -106,6 +129,30 @@ function Body() {
                  arrows={true} 
                  autoplay={true}
                  autoplaySpeed={5000}
+                 responsive={[
+                 {
+                  breakpoint:640,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 10,   
+                  }
+                 },
+                 {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 20,
+                    }
+                  },
+                  {
+                    breakpoint: 768, 
+                    settings: {
+                      slidesToShow: 2, 
+                      slidesToScroll: 10,
+                    }
+                  }
+                ]}
+
                 > 
                   {
                     originalRestaurantsData.filter(restaurant => restaurant.info.avgRatingString >= 4.0)
@@ -139,7 +186,7 @@ function Body() {
           {/*----------div named Search-bar contain code to search desired food and restaurants from list or data -------------- */} 
 
           <div className="search-bar flex justify-center">
-            <input type="text"className='border border-gray-300  p-2 focus:outline-none  w-4/12 h-[50px]' placeholder="Search for food or restaurants" id="search-text"
+            <input type="text"className='border border-gray-300  p-2 focus:outline-none  w-6/12 h-[50px]' placeholder="Search for food or restaurants" id="search-text"
             onChange={(e) => {
               searchText=e.target.value.toLowerCase();
             }}
@@ -171,7 +218,7 @@ function Body() {
          
        {/*----------- div named filter-top-restaurants to show restaurants list having rating above or equal to 4.5 -------------------*/}
 
-          <div className='filters flex justify-center'>
+          <div className='filters flex justify-center flex-wrap'>
               <button  className=' bg-slate-200  hover:bg-customOrange w-[100px] h-[40px] m-4 rounded-full shadow-md shadow-slate-800 text-customGrey font-semibold hover:text-white' onClick={() => {
                   let filteredList = originalRestaurantsData.filter((restaurant) => {
                       return restaurant.info.avgRatingString >= 4.5 //filter for top rated restuarants
