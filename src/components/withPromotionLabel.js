@@ -11,7 +11,7 @@ const withPromotionLabel=(WrappedComponent)=> {
         <div>
            {promoted && <label style={{color:"red"}}>Promoted</label>}
            <WrappedComponent {...enhancedProps} />
-           {console.log("enhanced props",props)}
+           {/* {console.log("enhanced props",props)} */}
         </div>
 
         )

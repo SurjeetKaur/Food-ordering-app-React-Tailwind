@@ -17,6 +17,8 @@ export const RES_MENU_API = "https://www.swiggy.com/dapi/menu/pl?page-type=REGUL
 // RESTAURANT MENU IMAGES
 export const MENU_IMAGE= "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/"; 
 
+export const EMPTY_CART_IMG="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0";
+
 
 export const  DATA_RESTAURANTS=[
                                 {

@@ -10,7 +10,7 @@ async function useRestaurantCards() {
             : json?.data?.cards[3].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[3].card?.card?.gridElements?.infoWithStyle?.restaurants
                 : json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants ? json?.data?.cards[4].card?.card?.gridElements?.infoWithStyle?.restaurants
                     : DATA_RESTAURANTS;
-    console.log("resdata from hook", resData)
+    //console.log("resdata from hook", resData)
     //resData = [];
     return resData;
 

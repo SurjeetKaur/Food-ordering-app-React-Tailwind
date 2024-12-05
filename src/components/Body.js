@@ -32,6 +32,7 @@ function Body() {
   let[specialItemsData, setSpecialItemsData] = useState([]);
   let[shimmerEffect,setShimmerEffect]=useState(false);
   let[noResultsFound,setNoResultsFound]=useState(false);
+  let[noVegRestaurantsFound,setNoVegRestaurantFound]=useState(false);
   
 {/*---------async function named fetchData to call  and fetch data from swiggy API-------------------- */}  
 
@@ -45,7 +46,7 @@ function Body() {
         setSpecialItemsData(resGridData);
         setShimmerEffect(false); //hide shimmer effect
 
-        const resData= await useRestaurantCards();
+        let resData= await useRestaurantCards();
         setRestaurants(resData);
         console.log( "resData",resData);
         setOriginalResturantsData(resData); //original restaurant's data
@@ -138,7 +139,7 @@ function Body() {
           {/*----------div named Search-bar contain code to search desired food and restaurants from list or data -------------- */} 
 
           <div className="search-bar flex justify-center">
-            <input type="text"className='border border-gray-300  p-2 focus:outline-none  w-[400px] h-[50px]' placeholder="Search for food or restaurants" id="search-text"
+            <input type="text"className='border border-gray-300  p-2 focus:outline-none  w-4/12 h-[50px]' placeholder="Search for food or restaurants" id="search-text"
             onChange={(e) => {
               searchText=e.target.value.toLowerCase();
             }}
@@ -170,8 +171,8 @@ function Body() {
          
        {/*----------- div named filter-top-restaurants to show restaurants list having rating above or equal to 4.5 -------------------*/}
 
-          <div className='filter-top-restaurants flex'>
-              <button  className='bg-customOrange w-[100px] h-[50px] m-4 rounded  hover:bg-gray-300' onClick={() => {
+          <div className='filters flex justify-center'>
+              <button  className=' bg-slate-200  hover:bg-customOrange w-[100px] h-[40px] m-4 rounded-full shadow-md shadow-slate-800 text-customGrey font-semibold hover:text-white' onClick={() => {
                   let filteredList = originalRestaurantsData.filter((restaurant) => {
                       return restaurant.info.avgRatingString >= 4.5 //filter for top rated restuarants
                   })
@@ -181,11 +182,52 @@ function Body() {
                 }} >
                  Ratings 4.4+
               </button>
+              <button  className= ' bg-slate-200  hover:bg-customOrange w-[100px] h-[40px] m-4 rounded-full shadow-md shadow-slate-800 text-customGrey font-semibold  hover:text-white' onClick={() => {
+                  let filteredList = originalRestaurantsData.filter((restaurant) => {
+                      return restaurant.info.veg===true
+                  })
+                  if(filteredList.length===0){
+                   // alert('No veg restuarants found');
+                    setNoVegRestaurantFound(true);
+                  }else{
+                    setNoVegRestaurantFound(false);
+                  }
+                  setRestaurants(filteredList)
+                  //console.log("pure veg only",filteredList);
+                  
+                }} >
+                 Pure Veg
+              </button>
+              <button  className=  ' bg-slate-200  hover:bg-customOrange w-[100px] h-[40px] m-4 rounded-full shadow-md shadow-slate-800 text-customGrey font-semibold  hover:text-white' onClick={() => {
+                  let filteredList = originalRestaurantsData.filter((restaurant) => {
+                      return restaurant.info.sla.deliveryTime<=35;
+                  })
+                  setRestaurants(filteredList)
+                  //console.log("fast delivery",filteredList); 
+                  
+                }} >
+                 Fast delivery
+              </button>
+                
+              <button  className=  ' bg-slate-200  hover:bg-customOrange w-[100px] h-[40px] m-4 rounded-full shadow-md shadow-slate-800 text-customGrey font-semibold  hover:text-white' onClick={() => {
+                  let filteredList = originalRestaurantsData.filter((restaurant) => {
+                      return restaurant.info.aggregatedDiscountInfoV3?.discountTag && restaurant.info.aggregatedDiscountInfoV3.discountTag.trim() !== "";
+                    
+                  })
+                  setRestaurants(filteredList)
+                  console.log("offers",filteredList); 
+                  
+                }} >
+                 Offers
+              </button>   
           </div>
 
            {/* -----------------div container which has all cards of restaurants with data -------------------------------*/}
           
             <div id="res-id" className='res-container flex flex-row justify-evenly w-full flex-wrap mb-4'>
+            {noVegRestaurantsFound && (
+                 <div className='text-red-600 py-4'>No vegetarian restaurants found!</div>
+                 )}
               {
                 noResultsFound ? ( <div id='alert-message' className='text-red-600 py-4'>No restaurants or food found matching your search criteria !</div>):(
                 restaurants && restaurants.map((restaurant, index) => {

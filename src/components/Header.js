@@ -11,6 +11,9 @@ const Header = () => {
         //console.log("header useEffect is called");
     }, [])
     const cartItems= useSelector((store)=>store.cart.items);
+    // const getTotalQuantity = (items) => {
+    //     return items.reduce((total, item) => total + item.quantity, 0);
+    // };
     return (
         <div className="header w-full m-auto h-[100px] flex  flex-row justify-around shadow-bottomOnly">
             <div className="logo-container">
@@ -40,7 +43,7 @@ const Header = () => {
                             {btnText}
                          </Link> 
                     </li>
-                    <li><Link className='text-customGrey hover:text-customOrange'><i className="fa fa-shopping-cart"></i>Cart <span className='text-white text-base bg-green-500 h-6 w-6 inline-block text-center rounded-full'>{cartItems.length}</span></Link></li>
+                    <li><Link to='/cart' className='text-customGrey hover:text-customOrange'><i className="fa fa-shopping-cart"></i>Cart <span className='text-white text-base bg-green-500 h-6 w-6 inline-block text-center rounded-full'>{cartItems.length}</span></Link></li>
 
                 </ul>
             </div>
