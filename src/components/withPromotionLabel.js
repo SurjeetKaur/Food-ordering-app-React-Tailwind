@@ -6,16 +6,16 @@ const withPromotionLabel=(WrappedComponent)=> {
     return(props)=>{
         // console.log("props", props)
         const {promoted, ...enhancedProps}=props;
-        // console.log("enhancedProps",props);
+         console.log("enhancedProps",props);
         return (
         <div>
-           {promoted && <label style={{color:"red"}}>Promoted</label>}
+           {promoted && <label className="absolute bg-customOrange text-white  px-2 z-10 rounded-md">Promoted</label>}
            <WrappedComponent {...enhancedProps} />
-           {/* {console.log("enhanced props",props)} */}
+            
         </div>
 
         )
     }
 }
-export default withPromotionLabel
+export default withPromotionLabel;
 

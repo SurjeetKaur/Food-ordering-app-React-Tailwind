@@ -3,6 +3,7 @@ import {useParams} from "react-router-dom";
 import ShimmerUi from './ShimmerUi';
 import RestaurantMenuCategory from './RestaurantMenuCategory';
 import useRestaurantMenuCategory from '../utils/useRestaurantMenuCategory';
+import RestaurantCard from './RestaurantCard';
 
 
 
@@ -11,20 +12,57 @@ function RestaurantMenu() {
     //console.log("resId", restaurantId)
     const categories = useRestaurantMenuCategory(restaurantId)
     //console.log("categories from Restaurant Menu", categories)
-    
+    const [filter, setFilter] = useState('ALL');
+    const[searchText,setSearchText]=useState('');
        
        
     if (categories.length == 0) {
         return <ShimmerUi />
     }
+
+    // Apply category filter and search filter in one step
+    let filteredAndSearchedCategories = categories.map((category) => {
+        // Check if itemCards exists to avoid undefined errors
+        const items = category.card?.card?.itemCards || [];
+
+        // Filter by category
+        const filteredItems = items.filter((item) => {
+            if (filter === 'ALL') return true;
+            if (filter === 'VEG') return item.card.info.itemAttribute.vegClassifier === 'VEG';
+            if (filter === 'NONVEG') return item.card.info.itemAttribute.vegClassifier === 'NONVEG';
+            if (filter === 'BESTSELLER') return item.card.info.isBestseller;
+            return false;
+        });
+
+        // Search filter
+        const searchedItems = filteredItems.filter((item) =>
+            item.card.info.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+
+        return {
+            ...category,
+            card: { ...category.card, card: { ...category.card.card, itemCards: searchedItems } }
+        };
+    });
+//console.log("filteredAndSearchedCategories", filteredAndSearchedCategories)
+   
+
+     
+    const handleFilter = (type) => {
+        setFilter(type);
+    };
+    const handleSearch = (e) => {
+        setSearchText(e.target.value);
+    };
+    //const restaurantName=
+
     return (
         <div className='menu-categories w-10/12 m-auto'>
             <h2 className='text-customGrey text-center text-4xl p-6'>Menu 🍽️</h2>
             <div className='flex flex-wrap justify-center'>
                 <input type="text" className='border border-gray-300  p-2 focus:outline-none  w-[400px] h-[50px]' placeholder="Search for dishes"
-                onChange={(e) => {
-                searchText=e.target.value.toLowerCase();
-                }}
+                value={searchText}
+                onChange={handleSearch}
                 />
                 <button className="search-btn h-[50px] w-[50px] pl-4 bg-customOrange hover:bg-gray-300"><i className=" fa fa-search  text-xl mr-4"></i>
                 </button>
@@ -55,9 +93,13 @@ function RestaurantMenu() {
             <div>
                 <h3>
                     <ul>
-                        {categories.map((category,index) => (
-                            <RestaurantMenuCategory key={index} data={category} />
-                        ))}
+                    {filteredAndSearchedCategories.some(category => category.card.card.itemCards.length > 0) ? (
+                filteredAndSearchedCategories.map((category, index) => (
+                    <RestaurantMenuCategory key={index} data={category} />  
+                ))
+            ) : (
+                <p className="flex justify-center text-center text-xl text-red-500 py-8 mx-auto">No item(s) found! </p>
+            )}  
                     </ul>
                 </h3>
             </div>  

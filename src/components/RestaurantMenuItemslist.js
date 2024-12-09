@@ -8,6 +8,7 @@ import { addProduct, removeProduct } from '../utils/cartSlice'; //item to add in
 function RestaurantMenuItemsList({ items }) {
     const dispatch=useDispatch();
     const cartItems=useSelector((state)=>state.cart.items);
+    const[ message, setMessage]=useState('');
 
     const getItemQuantity = (itemId) => {
         const item = cartItems.find((cartItem) => cartItem.card.info.id === itemId);
@@ -17,9 +18,18 @@ function RestaurantMenuItemsList({ items }) {
       
     const handleCartItem=(item)=>{
         dispatch(addProduct(item));
-    }
+        setMessage(`${item.card.info.name} has been added to the cart!`);
+        setTimeout(()=>{
+            setMessage('');
+            },3000);
+        };
+    
     const handleRemoveItem=(item)=>{
         dispatch(removeProduct(item));
+        setMessage(`${item.card.info.name} has been removed from the cart!`);
+        setTimeout(()=>{
+            setMessage('');
+            },3000);
 
     }
     const handleAddItem=(item)=>{
@@ -27,6 +37,7 @@ function RestaurantMenuItemsList({ items }) {
     }
     return (
         <div>
+             {message && <div className="alert fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-4 px-4 rounded bg-green-500 text-black mx-auto bg-opacity-8 z-10 h-8">{message}</div>} 
             {
                 items?.map(item => (
                     <div className='p-2 m-2 flex border-gray-200 border-b-2 justify-between'>
@@ -70,7 +81,7 @@ function RestaurantMenuItemsList({ items }) {
                              </div>   
                             )}
                             </div>
-                            <img src={RES_IMG_URL + item.card.info.imageId} className="w-32 h-32 rounded-lg "  alt="item-image"/>
+                            {item.card.info.imageId? <img src={RES_IMG_URL + item.card.info.imageId} className="w-32 h-32 rounded-lg "  alt="item-image"/> : <i className="fa fa-image text-9xl text-slate-400"></i>}
                         </div> 
                     </div>
                 ))

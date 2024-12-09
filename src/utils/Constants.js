@@ -1031,6 +1031,7 @@ export const  DATA_RESTAURANTS=[
                                         "name": "Mandi House Arabian Restaurant",
                                         "cloudinaryImageId": "fvwthx3y9ulhjvoxweoz",
                                         "locality": "Main Road",
+                                        "promoted":true,
                                         "areaName": "Santoshnagar & Saidabad",
                                         "costForTwo": "₹400 for two",
                                         "cuisines": [

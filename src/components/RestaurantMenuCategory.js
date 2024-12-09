@@ -14,7 +14,7 @@ function RestaurantMenuCategory({ data }) {
                     <span className='font-bold text-lg'>
                         {data.card?.card?.title} {(data.card?.card?.itemCards?.length>0)? `(${data.card?.card?.itemCards?.length})`: `(${0})`}
                     </span>
-                    <span className='text-customOrange font-extrabold text-2xl'>{shouldItemDisplay ? "⇧" : "⇩"}</span>   
+                    <span className='text-customOrange font-extrabold text-2xl'>{shouldItemDisplay ?  <i className="fa fa-angle-up"></i>: <i className="fa fa-angle-down"></i>}</span>   
                 </div> 
                 <hr/>
             {/* accordian body */} 

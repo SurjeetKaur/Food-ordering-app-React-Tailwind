@@ -46,9 +46,9 @@ function Body() {
         setSpecialItemsData(resGridData);
         setShimmerEffect(false); //hide shimmer effect
 
-        let resData= await useRestaurantCards();
+        const resData= await useRestaurantCards();
         setRestaurants(resData);
-        console.log( "resData",resData);
+       // console.log( "resData",resData);
         setOriginalResturantsData(resData); //original restaurant's data
         setShimmerEffect(false);// Hide shimmer effect after fetching
     }
@@ -138,6 +138,14 @@ function Body() {
                   }
                  },
                  {
+                  breakpoint:540,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 10,
+                    }
+
+                 },
+                 {
                   breakpoint: 480,
                   settings: {
                     slidesToShow: 1,
@@ -148,6 +156,21 @@ function Body() {
                     breakpoint: 768, 
                     settings: {
                       slidesToShow: 2, 
+                      slidesToScroll: 10,
+                    }
+                  },
+                  {
+                    breakpoint: 1024,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll: 10,
+                      }
+                      
+                  },
+                  {
+                    breakpoint: 1368, 
+                    settings: {
+                      slidesToShow: 4, 
                       slidesToScroll: 10,
                     }
                   }
@@ -282,7 +305,7 @@ function Body() {
                   <Link to={"/restaurantmenu/" + restaurant.info.id}>
                      <EnhancedRestaurantCard
                         key={index}
-                        promoted={restaurant.info.promotion}
+                        promoted={restaurant.info.promoted}
                         cloudinaryId={restaurant.info.cloudinaryImageId} 
                         name={restaurant.info.name}
                         deliveryTime={restaurant.info.sla.slaString}
