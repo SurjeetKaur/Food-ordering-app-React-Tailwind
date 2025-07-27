@@ -2,7 +2,7 @@ import { useState } from 'react';
 import React from 'react';
 import ItemList from './RestaurantMenuItemslist';
 
-function RestaurantMenuCategory({ data }) {
+function RestaurantMenuCategory({ data,restaurantName }) {
     const [shouldItemDisplay, setshouldItemDisplay] = useState(true);
     const handleClick = () => {
         setshouldItemDisplay(!shouldItemDisplay)
@@ -18,7 +18,7 @@ function RestaurantMenuCategory({ data }) {
                 </div> 
                 <hr/>
             {/* accordian body */} 
-            {shouldItemDisplay && <ItemList items={data.card.card.itemCards} />}   
+            {shouldItemDisplay && <ItemList items={data.card.card.itemCards} restaurantName={restaurantName} />}   
         </div>
     )    
 }

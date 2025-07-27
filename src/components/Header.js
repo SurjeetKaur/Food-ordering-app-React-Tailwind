@@ -16,7 +16,7 @@ const Header = () => {
     //     return items.reduce((total, item) => total + item.quantity, 0);
     // };
     return (
-        <div className="header w-full m-auto h-[100px] flex  flex-row justify-around shadow-bottomOnly md:shadow-bottomOnly px-4 relative">
+        <div className="header fixed top-0 left-0 z-50 w-full m-auto h-[100px] flex  flex-row justify-around shadow-slate-800 shadow-bottomOnly md:shadow-bottomOnly px-4 bg-white ">
             <div className="logo-container">
                 <Link to="/"><img  class="w-[70px] h-[70px] mt-2 transition-transform duration-300 transform hover:scale-110"
                     alt="app-logo"
@@ -29,22 +29,14 @@ const Header = () => {
                 </button>
                 <div className={`nav-container ${isMenuOpen ? 'block' : 'hidden'} md:block md:relative absolute left-0 md:top-0 md-left-auto md:w-auto md:bg-transparent bg-slate-50 text-customGrey md:shadow-none shadow-bottomOnly w-screen z-10 top-full`}>
                     <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4  space-x-2 pt-2 text-lg">
-                        <li><Link to="/corporate" className='text-customGrey hover:text-customOrange pl-2 '><i className=" fa fa-briefcase mr-2"></i>Swiggy Corporate</Link></li>
-                        <li><Link to="/search" className='text-customGrey hover:text-customOrange'><i className="fa fa-search  mr-2"></i>Search</Link></li>
-                        <li><Link to="/offers" className='text-customGrey hover:text-customOrange'><i className="fa fa-gift mr-2"></i>Offers</Link></li>
+                        <li><Link to="/aboutus" className='text-customGrey hover:text-customOrange pl-2 '><i className=" fa fa-briefcase mr-2"></i>About Us</Link></li>
                         <li><Link to="/grocery" className='text-customGrey hover:text-customOrange'><i className='fa fa-leaf mr-2'></i>Grocery</Link></li>
-                        <li><Link to="/help" className='text-customGrey hover:text-customOrange'><i className="fa fa-question-circle mr-2"></i>Help</Link></li>
+                        <li><Link to="/contact" className='text-customGrey hover:text-customOrange'><i className="fa fa-address-book mr-2"></i>Contact</Link></li>
                         <li>
                             <Link to='/#' className='text-customGrey hover:text-customOrange' onClick={()=>{
                                     btnText=== "Sign In" ? setBtnText("Sign Out"): setBtnText("Sign In")
                                     }}> 
                                     <i className="fa fa-user mr-2"></i> 
-                        
-                                {/* <button onClick={()=>{
-                                    btnText=== "Sign In" ? setBtnText("Sign Out"): setBtnText("Sign In")
-                                    }}>
-                                        {btnText}
-                                </button> */}
                                 {btnText}
                             </Link> 
                         </li>

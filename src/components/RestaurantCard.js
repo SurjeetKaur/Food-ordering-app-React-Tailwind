@@ -1,12 +1,24 @@
 import React from 'react'
 import { RES_IMG_URL} from '../utils/Constants' //to access one out of multiple components from one page use {}
-
+import { useDispatch } from 'react-redux';
+import{setRestaurantName} from '../utils/cartSlice'
 
 // third VERSION OF FUNCTION RestaurantCard  using map  #dynamic
 
-function RestaurantCard({ name,discountHeader,discountSubHeader,discountTag ,cuisines, ratings, deliveryTime,areaName, cloudinaryId,}) {
+function RestaurantCard({name,discountHeader,discountSubHeader,discountTag ,cuisines, ratings, deliveryTime,areaName, cloudinaryId,}) {
+    const dispatch = useDispatch();
+
+    const handleSelectRestaurant = () => {
+        console.log("Dispatching setRestaurantName with name:", name);
+        dispatch(setRestaurantName(name));
+         // Ensure Redux state updates before redirecting to menu
+        setTimeout(() => {
+            console.log("Redux restaurant name updated:", name);
+        }, 500);
+    };
+    
     return (
-        <div className='res-card relative h-[350px] w-[250px] mx-auto  my-4 rounded-2xl shadow-slate-400 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-95'>
+        <div className='res-card relative h-[350px] w-[230px] mx-auto  my-4 rounded-2xl shadow-slate-400 shadow-lg transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-95' onClick={handleSelectRestaurant}>
             <img className='res-logo w-full h-[50%] rounded-2xl' src={`${RES_IMG_URL}${cloudinaryId}`} alt="restaurant image" />
             <span className="res-text absolute top-[40%] left-0 right-0 flex items-left bg-black w-full text-white text-sm z-10  p-2 h-[42px] truncate">{discountHeader} {discountSubHeader} {discountTag}</span>
             <div className="res-description mx-auto mt-2 w-11/12">

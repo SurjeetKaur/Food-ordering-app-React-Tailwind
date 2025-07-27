@@ -2072,6 +2072,76 @@ export const MOCK_RES_MENU=[
     }
 ]
 
+// banner of about us page
 
-
- 
+export const BANNER_ABOUT="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/about-banner-image-scaled.webp";
+export const BANNER_RIGHT_ARROW="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/about-banner-right-arrow.webp";
+export const BANNER_LEFT_ARROW="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/about-banner-left-arrow.webp";
+export const INSTAMART_ICON="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/instamart-1-282x300.webp";
+export const DINEOUT_ICON="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/dineout-282x300.webp";
+export const FOOD_ICON="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/food.webp";
+export const VIDEO_ABOUT="https://www.swiggy.com/corporate/wp-content/uploads/2024/11/WhatsApp-Video-2024-11-18-at-15.49.51.mp4";
+export const INDUSTRY_PIONEER="https://www.swiggy.com/corporate/wp-content/uploads/2024/11/Group-1116602947-1024x676.webp";
+export const SWIGGY_LOGO="https://www.swiggy.com/corporate/wp-content/uploads/2024/10/swiggy-sign-198x300.webp";
+export const VEGETABLES_GROCERY = [
+  {
+    id: 1,
+    name: "Tomato",
+    price: "₹40",
+    emoji: "🍅",
+    description: "Juicy red tomatoes for salads and sauces.",
+    unit: "per kg",
+    category: "Fruit Veggie",
+    isOrganic: true,
+  },
+  {
+    id: 2,
+    name: "Cucumber",
+    price: "₹30",
+    emoji: "🥒",
+    description: "Cool and crunchy cucumbers.",
+    unit: "per piece",
+    category: "Fruit Veggie",
+    isOrganic: true,
+  },
+  {
+    id: 3,
+    name: "Carrot",
+    price: "₹45",
+    emoji: "🥕",
+    description: "Orange carrots full of vitamin A.",
+    unit: "per kg",
+    category: "Root",
+    isOrganic: true,
+  },
+  {
+    id: 4,
+    name: "Spinach",
+    price: "₹25",
+    emoji: "🥬",
+    description: "Leafy green spinach, rich in iron.",
+    unit: "per bunch",
+    category: "Leafy",
+    isOrganic: false,
+  },
+  {
+    id: 5,
+    name: "Broccoli",
+    price: "₹60",
+    emoji: "🥦",
+    description: "Healthy broccoli florets.",
+    unit: "per kg",
+    category: "Flower Veggie",
+    isOrganic: true,
+  },
+  {
+    id: 6,
+    name: "Potato",
+    price: "₹20",
+    emoji: "🥔",
+    description: "Versatile cooking potatoes.",
+    unit: "per kg",
+    category: "Root",
+    isOrganic: false,
+  },
+];

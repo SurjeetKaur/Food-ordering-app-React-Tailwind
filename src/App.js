@@ -4,7 +4,8 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
-import Corporate from "./components/Corporate";
+import AboutUs from "./components/AboutUs";
+import Contact from "./components/Contact";
 import ErrorHandling from "./components/ErrorHandling";
 import RestaurantMenu from "./components/RestaurantMenu";
 import './index.css';
@@ -21,6 +22,7 @@ const AppLayout = () => {
         <Provider store={appStore}>  {/* connect store to app for cart*/}
             <>
                 <Header />
+                <div className="pt-[100px]"></div>
                 <Outlet />    {/*dynamic component */}
                 <Footer />
             </>
@@ -41,24 +43,24 @@ const appRouter = createBrowserRouter([
                 element: <Body />,
             },
             {
-                path: "corporate",
-                element: <Corporate />
+                path: "aboutus",
+                element: <AboutUs />
             },
             
-            // {
-            //      path: "help",
-            //     element: <Help />
-            // },
+            {
+                 path: "contact",
+                element: <Contact />
+            },
             {
                 path:"grocery",
-                element: <Suspense fallback={<div>Loading...</div>}> 
-                             <Grocery businessName="vegetables Grocery"/>
+                element: <Suspense fallback={<div className="items-center justify-center text-3xl p-4">Loading......</div>}> 
+                             <Grocery businessName="Vegetables"/>
                          </Suspense>
 
             },
             {
                 path: "restaurantMenu/:restaurantId",
-                element: <RestaurantMenu />
+                element: <RestaurantMenu />,
             },
             {
                 path: "cart",

@@ -8,3 +8,27 @@
       box-sizing: border-box;
     }
   }
+
+  
+/*  Custom styles for Contact Us page background blur */
+.contact-us-page {
+  position: relative;
+  z-index: 0;
+}
+
+.contact-us-page::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 40%;
+  background-color: #FF5200;
+  border-radius: 50%;
+  rotate: 348deg;
+  z-index: -1;
+  filter: blur(125px);
+  opacity: 0.2;
+  top: 22%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}

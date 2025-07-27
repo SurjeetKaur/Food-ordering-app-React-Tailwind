@@ -33,6 +33,7 @@ function Body() {
   let[shimmerEffect,setShimmerEffect]=useState(false);
   let[noResultsFound,setNoResultsFound]=useState(false);
   let[noVegRestaurantsFound,setNoVegRestaurantFound]=useState(false);
+  let [visibleCount, setVisibleCount] = useState(10); 
   
 {/*---------async function named fetchData to call  and fetch data from swiggy API-------------------- */}  
 
@@ -51,8 +52,13 @@ function Body() {
        // console.log( "resData",resData);
         setOriginalResturantsData(resData); //original restaurant's data
         setShimmerEffect(false);// Hide shimmer effect after fetching
+
     }
    
+     // Show 10 restaurants initially
+        const handleShowMore = () => {
+          setVisibleCount(prev => prev + 10); // Load 10 more on click
+        };
 
    // HOC => accepts RestaurantCard as input and returns enhanced RestaurantCard
    const EnhancedRestaurantCard = withPromotionLabel(RestaurantCard)
@@ -300,7 +306,8 @@ function Body() {
                  )}
               {
                 noResultsFound ? ( <div id='alert-message' className='text-red-600 py-4'>No restaurants or food found matching your search criteria !</div>):(
-                restaurants && restaurants.map((restaurant, index) => {
+                restaurants && restaurants.slice(0,visibleCount)
+                .map((restaurant, index) => {
                   return (
                   <Link to={"/restaurantmenu/" + restaurant.info.id}>
                      <EnhancedRestaurantCard
@@ -320,6 +327,16 @@ function Body() {
                   })
                 )} 
             </div>
+            {!noResultsFound && visibleCount < restaurants.length && (
+              <div className="text-center mb-6">
+                <button
+                  onClick={handleShowMore}
+                  className="px-6 py-2 bg-customOrange text-white rounded hover:bg-orange-400 rounded transition"
+                >
+                  Show More
+                </button>
+              </div>
+            )}
           </div>
         </div>
     

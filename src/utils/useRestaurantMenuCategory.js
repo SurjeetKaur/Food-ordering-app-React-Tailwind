@@ -15,8 +15,8 @@ const useRestaurantMenuCategory = (restaurantId) => {
 
         // get the categories
         // 1. ItemCategory
-        const category = cards.filter((menuItem) => menuItem.card.card?.["@type"].includes("ItemCategory"))
-        console.log("category", category)
+        const category = cards?.filter((menuItem) => menuItem.card.card?.["@type"].includes("ItemCategory"))
+        console.log("restaurant menu category", category)
         setResMenu(category)
     }
     else{

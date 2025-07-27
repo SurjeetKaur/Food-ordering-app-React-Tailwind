@@ -7,12 +7,16 @@ module.exports = {
     extend: {
       colors: {
         customGrey:'#3d4152',
+         customAbout: '#02060CBF',
         customOrange: '#ff5200', 
         customBackground:'rgb(255, 255, 255)',  
     },
     boxShadow: {
       bottomOnly:'0 8px 6px -6px #D1D5DB', 
   },
+   
+  
+ 
   },
 
   plugins: [],
